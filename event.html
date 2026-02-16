@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Event Registration Portal</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #1f2a2e;
+        --sand: #f7f1e6;
+        --coral: #e0685a;
+        --ocean: #1f6f7a;
+        --leaf: #2f7c5b;
+        --card: #fff8ef;
+        --shadow: 0 20px 50px rgba(31, 42, 46, 0.15);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Space Grotesk", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(circle at 15% 15%, #fff2d6, transparent 50%),
+          radial-gradient(circle at 85% 25%, #d8f3f1, transparent 50%),
+          linear-gradient(120deg, #f2ece0, #f6f9f7);
+        min-height: 100vh;
+      }
+
+      header {
+        padding: 48px 6vw 24px;
+        display: grid;
+        gap: 24px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 32px;
+        align-items: center;
+      }
+
+      .headline {
+        display: grid;
+        gap: 16px;
+      }
+
+      h1 {
+        margin: 0;
+        font-family: "Playfair Display", "Times New Roman", serif;
+        font-size: clamp(2.2rem, 4vw, 3.3rem);
+      }
+
+      .tagline {
+        font-size: 1.1rem;
+        max-width: 520px;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .pill {
+        padding: 10px 16px;
+        border-radius: 999px;
+        background: var(--ink);
+        color: #fff;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .pill.secondary {
+        background: var(--card);
+        color: var(--ink);
+        border: 1px solid rgba(31, 42, 46, 0.2);
+      }
+
+      .banner {
+        width: 100%;
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        transform: translateY(0);
+        animation: floatIn 0.8s ease-out;
+      }
+
+      .banner img {
+        width: 100%;
+        display: block;
+      }
+
+      main {
+        padding: 0 6vw 64px;
+        display: grid;
+        gap: 40px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+      }
+
+      .card {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 24px;
+        box-shadow: var(--shadow);
+        animation: rise 0.6s ease-out;
+      }
+
+      .media-title {
+        margin-top: 0;
+        font-family: "Playfair Display", "Times New Roman", serif;
+      }
+
+      video,
+      audio {
+        width: 100%;
+        border-radius: 16px;
+        margin-top: 12px;
+      }
+
+      form {
+        display: grid;
+        gap: 18px;
+      }
+
+      label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(31, 42, 46, 0.2);
+        background: #fff;
+        font-family: inherit;
+      }
+
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .radio-group {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .radio-group label {
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .submit {
+        background: var(--coral);
+        color: #fff;
+        border: none;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(224, 104, 90, 0.25);
+      }
+
+      .helper {
+        font-size: 0.9rem;
+        color: rgba(31, 42, 46, 0.7);
+      }
+
+      footer {
+        padding: 24px 6vw 48px;
+        font-size: 0.95rem;
+        color: rgba(31, 42, 46, 0.65);
+      }
+
+      @keyframes floatIn {
+        from {
+          transform: translateY(16px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes rise {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 700px) {
+        header {
+          padding-top: 32px;
+        }
+
+        .cta-row {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="hero">
+        <div class="headline">
+          <h1>Coastal Futures Summit 2026</h1>
+          <p class="tagline">
+            A one-day gathering of makers, designers, and technologists shaping the
+            next generation of sustainable cities. Explore live demos, expert talks,
+            and hands-on labs.
+          </p>
+          <div class="cta-row">
+            <a class="pill" href="#register">Register Now</a>
+            <a class="pill secondary" href="#media">Watch the Promo</a>
+          </div>
+        </div>
+        <div class="banner">
+          <img
+            src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
+            alt="Event banner showing a coastal city skyline"
+          />
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="media" class="grid">
+        <div class="card">
+          <h2 class="media-title">Promotional Video</h2>
+          <p class="helper">
+            Get a quick overview of the summit highlights, speakers, and hands-on labs.
+          </p>
+          <video controls poster="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80">
+            <source
+              src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <div class="card">
+          <h2 class="media-title">Intro Audio</h2>
+          <p class="helper">
+            Listen to the opening theme and set the tone for the day.
+          </p>
+          <audio controls loop>
+            <source
+              src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+              type="audio/mpeg"
+            />
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </section>
+
+      <section id="register" class="card">
+        <h2 class="media-title">Event Registration Form</h2>
+        <p class="helper">
+          Fill out the form below to secure your spot. Fields marked with * are required.
+        </p>
+        <form>
+          <div>
+            <label for="full-name">Full Name *</label>
+            <input id="full-name" name="full-name" type="text" required />
+          </div>
+
+          <div>
+            <label for="email">Email Address *</label>
+            <input id="email" name="email" type="email" required />
+          </div>
+
+          <div>
+            <label for="date">Preferred Event Date *</label>
+            <input id="date" name="date" type="date" required />
+          </div>
+
+          <div>
+            <span class="helper">Attendance Mode *</span>
+            <div class="radio-group">
+              <label>
+                <input name="mode" type="radio" value="in-person" required />
+                In-Person
+              </label>
+              <label>
+                <input name="mode" type="radio" value="virtual" />
+                Virtual
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label for="track">Select Your Track *</label>
+            <select id="track" name="track" required>
+              <option value="" disabled selected>Choose a track</option>
+              <option value="design">Design & Urban Futures</option>
+              <option value="tech">Climate Tech</option>
+              <option value="policy">Policy & Partnerships</option>
+              <option value="makers">Maker Labs</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="notes">Special Requirements</label>
+            <textarea id="notes" name="notes" placeholder="Dietary needs, accessibility, or other notes."></textarea>
+          </div>
+
+          <div>
+            <label for="badge">Upload Badge Photo (JPG/PNG)</label>
+            <input id="badge" name="badge" type="file" accept="image/*" />
+          </div>
+
+          <input class="submit" type="submit" value="Submit Registration" />
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      Need help? Email events@coastalfutures.example or call +1 (555) 014-2026.
+    </footer>
+  </body>
+</html>
